@@ -1,0 +1,15 @@
+rules_version = '2';
+
+// Open demo rules: anyone may submit a form, view the stats, and delete
+// submissions (the /_delete endpoint wipes the collection). Documents cannot
+// be edited once created.
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /submissions/{id} {
+      allow read: if true;
+      allow create: if true;
+      allow delete: if true;
+      allow update: if false;
+    }
+  }
+}
